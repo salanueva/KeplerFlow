@@ -2,7 +2,7 @@ open(string(Base.source_path()[1:(end-8)],"kepler.c")) do f
     code = readstring(f)
 
 	# liburutegiaren PATH-a hemen gordeko da
-	const Clib = tempname() 
+	Clib = tempname() 
 
 	# konpilatzeko, C-ko math liburutegia behar da
 	# liburutegia konpilatuko dugu, -lm
