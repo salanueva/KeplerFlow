@@ -1,4 +1,4 @@
-open("kepler.c") do f
+open(string(Base.source_path()[1:(end-8)],"kepler.c")) do f
     code = read(f, String)
 
     # liburutegiaren PATH-a hemen gordeko da
