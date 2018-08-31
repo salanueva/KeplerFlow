@@ -1,8 +1,8 @@
 @eval open(string(Base.source_path()[1:(end-8)],"kepler.c")) do f
     code = read(f, String)
-
+    
     # liburutegiaren PATH-a hemen gordeko da
-    Clib = tempname() 
+    Clib = mktemp()[1]
 
     # konpilatzeko, C-ko math liburutegia behar da
     # liburutegia konpilatuko dugu, -lm
