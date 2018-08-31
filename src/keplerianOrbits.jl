@@ -120,11 +120,11 @@ function keplerFlow(r0_bek, v0_bek, dt, mu, Gz, trace = false)
     # with beta, we can know the shape of the orbit
     if trace
         if beta > 0.0
-            @printf "Orbit is elliptic.\n"
+            println("Orbit is elliptic.\n")
         elseif beta < 0.0
-            @printf "Orbit is hyperbolic.\n"
+            println("Orbit is hyperbolic.\n")
         else beta == 0.0
-            @printf "Orbit is parabolic.\n"
+            println("Orbit is parabolic.\n")
         end
     end
     
@@ -191,11 +191,11 @@ function keplerFlowWithKahan(r0_bek, v0_bek, dt, mu, Gz, trace, r_k, v_k)
     # with beta, we can know the shape of the orbit
     if trace
         if beta > 0.0
-            @printf "Orbit is elliptic.\n"
+            println("Orbit is elliptic.\n")
         elseif beta < 0.0
-            @printf "Orbit is hyperbolic.\n"
+            println("Orbit is hyperbolic.\n")
         else beta == 0.0
-            @printf "Orbit is parabolic.\n"
+            println("Orbit is parabolic.\n")
         end
     end
     
