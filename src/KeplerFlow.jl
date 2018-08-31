@@ -1,6 +1,6 @@
 module KeplerFlow
 
-	import Base
+	import Base.LinAlg.norm
 
 	include("cCode.jl")	
 	include("coordinateTransform.jl")
