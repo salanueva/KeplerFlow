@@ -13,6 +13,7 @@
 #             simulation can be specified
 #    @key bool_energy: if true, energy of the hamiltonian will be calculated every output step
 #    @key bool_print_kep: information about the kepler-flow will be displayed in the console
+#    @key ignore_H0: the lineal movement of the whole system will be ignored if this boolean is true.
 #    @key out_step: the output will be calculated on every 'out_step'-th step  
 # @return exit: if there are some errors, it's true; otherwise, false
 

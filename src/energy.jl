@@ -1,24 +1,33 @@
-### calculateEnergy ###
-# DESCRIPTION: calculates the sum of kynetic and potential energy of the hamiltonian 
-#              system
-# INPUT: r, r_j, r_dist, p_j, m, m_j, mu, mu_sum
-# @param r: NxD matrix where N is the number of bodies and D the number of dimensions,
-#           it contains the positions of the bodies in cartesian coordinates
-# @param r_j: NxD matrix where N is the number of bodies and D the number of dimensions,
-#             it contains the positions of the bodies in jacobi coordinates
-# @param r_dist: array of N elements, in which distances from the bodies to the 
-#                barycenter are saved
-# @param p_j: NxD matrix where N is the number of bodies and D the number of dimensions,
-#             it contains the momentum of the bodies in jacobi coordinates
-# @param m: array of N elements, each containing the mass of each body
-# @param m_j: array of N elements, each containing the jacobi mass (m')
-# @param mu: array of N elements, each containing the standard gravitational parameter
-#            of the body (µ)
-# @param mu_sum: array of N elements, where the standard gravitational parameter of 
-#                the bodies from 1 to i is saved in the i-th element (µ_sum)
-# @param ignore_H0: a boolean that says if H0 will be ignored or not
-# @return energy: returns the energy of the hamiltonian system
+"""
+    function calculateEnergy(r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0)
+Calculates the sum of kynetic and potential energy of the N-body hamiltonian system
+```
+H_{\mathrm{N-body}}(\textbf{q}, \textbf{p}) = \frac{\textbf{p'}^{2}_{1}}{2 m'_{1}} + \sum_{i=2}^{N} \frac{\textbf{p'}^{2}_{i}}{2 m_{i}'} - \sum_{i=1}^{N} \sum_{j=i+1}^{N} \frac{Gm_{i}m_{j}}{\mid \textbf{q}_{i} - \textbf{q}_{j} \mid}
+```
+# INPUT: r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0
+# ARGS:
+* `r`: NxD matrix where N is the number of bodies and D is the number of dimensions, each row contains the positions of the bodies in cartesian coordinates.
+* `r_j`:  NxD matrix, it contains the positions of the bodies in jacobi coordinates.
+* `r_dist`: array of N elements, in which distances from the bodies to the barycenter are saved.
+* `p_j`: NxD matrix, it contains the momentum of the bodies in jacobi coordinates.
+* `m`: array of N elements, where element number i contains the mass of i-th body.
+* `m_j`: array of N elements, each containing the i-th jacobi mass (m'[i])
+```
+m'[1] = M[N] \\
+m'[i] = m_{i} \frac{M_{i-1}}{M_{i}}
+```
+* `mu`: array of N elements, where element with index i contains the standard gravitational parameter of the i-th body
+```
+mu[i] = G \cdot m[j]
 
+* `$mu_{sum}$`: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
+```
+mu_{sum}[i] = \sum_{j = 1}^{i} G \cdot m[j]
+```
+* `ignore_H0`: boolean that determines if Hamiltonian $H_{0}$ will be ignored (when calculating the energy).
+
+# RETURN: returns the energy of the $H_{N-body}$ system
+"""
 function calculateEnergy(r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0)
     energy = 0.0
     
