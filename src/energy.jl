@@ -1,4 +1,4 @@
-"""
+#="""
     calculateEnergy(r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0)
 
 Calculates the sum of kynetic and potential energy of the N-body hamiltonian system:
@@ -34,7 +34,7 @@ mu_{sum}[i] = \sum_{j = 1}^{i} G \cdot m[j]
 # Returns 
 
 The energy of the $H_{N-body}$ system.
-"""
+"""=#
 function calculateEnergy(r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0)
     energy = 0.0
     
