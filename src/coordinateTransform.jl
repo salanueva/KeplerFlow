@@ -11,7 +11,7 @@ Transforms cartesian coordinates into jacobi coordinates.
 * `r_j`: NxD matrix in which the results will be saved.
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_sum`: array of N elements, where element with index i contains the mass of the bodies from 1 to i
-```
+```math
 m_{sum}[i] = \sum_{j = 1}^{i} m[j]
 ```
 
@@ -39,7 +39,7 @@ Transforms jacobi coordinates into cartesian coordinates.
 * `r_j`: NxD matrix where N is the number of bodies and D is the number of dimensions, each row contains the positions of the bodies in jacobi coordinates.
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_sum`: array of N elements, where element with index i contains the mass of the bodies from 1 to i
-```
+```math
 m_{sum}[i] = \sum_{j = 1}^{i} m[j]
 ```
 
