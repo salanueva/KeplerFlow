@@ -12,6 +12,7 @@ Transforms cartesian coordinates into jacobi coordinates.
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_sum`: array of N elements, where element with index i contains the mass of the bodies from 1 to i
 ```math
+\\centering
 m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j} 
 ```
 """
