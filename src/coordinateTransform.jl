@@ -1,5 +1,5 @@
 """
-### function cartesian2jacobi!(r, r_j, m, m_sum) 
+    cartesian2jacobi!(r, r_j, m, m_sum) 
 
 Transforms cartesian coordinates into jacobi coordinates.
 
@@ -14,7 +14,6 @@ Transforms cartesian coordinates into jacobi coordinates.
 ```math
 m_{sum}[i] = \sum_{j = 1}^{i} m[j]
 ```
-
 """
 function cartesian2jacobi!(r, r_j, m, m_sum) 
     R = m[1]*r[1,:]
@@ -27,7 +26,7 @@ end
 
 
 """
-### function jacobi2cartesian!(r, r_j, m, m_sum) 
+    jacobi2cartesian!(r, r_j, m, m_sum) 
 
 Transforms jacobi coordinates into cartesian coordinates.
 
@@ -42,7 +41,6 @@ Transforms jacobi coordinates into cartesian coordinates.
 ```math
 m_{sum}[i] = \sum_{j = 1}^{i} m[j]
 ```
-
 """
 function jacobi2cartesian!(r, r_j, m, m_sum) 
     R = r_j[1,:]*m_sum[size(r)[1]]
