@@ -12,6 +12,6 @@ module KeplerFlow
 	include("masses.jl")
 	include("simulation.jl")
 
-	export cKeplerFlow!, cartesian2jacobi!, jacobi2cartesian!, calculateEnergy, analyzeInput!, saveOutput, showOutput, firstInteractionStep!, secondInteractionStep!, kahanSumOneValue, kahanSum!, stumpff!, keplerSolve!, keplerFlow, keplerFlowWithKahan, keplerStep!, keplerStepWithKahan!, calculateMassMu!, simulation
+	export cKeplerFlow!, cartesian2jacobi!, jacobi2cartesian!, calculateEnergy, saveOutput, showOutput, firstInteractionStep!, secondInteractionStep!, kahanSumOneValue, kahanSum!, stumpff!, keplerSolve!, keplerFlow, keplerFlowWithKahan, keplerStep!, keplerStepWithKahan!, calculateMassMu!, simulation
 
 end # module

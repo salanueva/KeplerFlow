@@ -1,12 +1,18 @@
-### Stumpff ###
-# DESCRIPTION: calculates the values of the c-functions and g-functions, which will be 
-#              used to solve Kepler's equation
-# INPUT: beta, x // OUTPUT: gz
-# @param beta: beta coefficient, which equals to µ/a (where a is the semi-major axis and
-#              µ the standard gravitational parameters of the bodies involved)
-# @param x: initial estimation of the variable x to solve the equation
-# @param Gz: array of 4 elements, in which the 4 g-functions will be saved
+"""
+    stumpff!(beta, x, Gz)
 
+Calculates the values of the c-functions and returns the first four g-functions, which will be used to solve Kepler's equation.
+
+```math
+c_{0} = \\cos(\\sqrt{z}) \\hspace{3cm} c_{1} = \\frac{\\sin(\\sqrt{z})}{\\sqrt{z}} \\hspace{3cm} c_{n} = \\frac{1}{n!} - z c_{n-2} \\hspace{3cm} G_{n} = x^n c_{n}
+```
+
+# Args
+
+* `beta`: a coefficient calculated in function `KeplerFlow`, which equals to `µ`/`a` (where `a` is the semi-major axis and `mu` the standard gravitational parameters of the bodies involved).
+* `x`: current estimation of the universal anomaly to solve the universal Kepler equation.
+* `Gz`: array of four elements, in which the first four g-functions will be saved.
+"""
 function stumpff!(beta, x, Gz)
     z = beta * (x^2)
     
@@ -32,21 +38,30 @@ end
 
 
 
-### keplerSolve! ###
-# DESCRIPTION: solves the trascendental equation of kepler
-# INPUT: x0, beta, eta0, zeta0, r0, dt, trace // OUTPUT: Gz
-# @param x0: initial estimation of the universal anomaly
-# @param beta: beta coefficient, which equals to µ/a (where a is the semi-major axis and
-#              µ the standard gravitational parameters of the bodies involved)
-# @param eta0: dot product between vectors r0 and v0, part of the equation we need to solve
-# @param zeta0: another quantity of the equation we need to solve 
-# @param r0: initial distance between the two bodies
-# @param Gz: array of the 4 g-functions. Instead of defining it on each execution of 
-#            the function, the same array is used in the whole simulation
-# @param dt: time-step of the kepler-flow
-# @param trace: boolean value that shows information of the execution if true
-# @return r: distance between the two bodies after time-step dt
+"""
+    keplerSolve!(x0, beta, eta0, zeta0, r0, Gz, dt, trace)
 
+Solves the universal equation of kepler. In this equation, G_{2} and G_{3} are the third and fourth
+
+```math
+r_{0}X + \\eta_{0}G_{2} + \\zeta_{0}G_{3} - dt = 0
+```
+
+# Args
+
+* `x0`: initial estimation of the universal anomaly.
+* `beta`: a coefficient calculated in function `KeplerFlow`, which equals to `µ`/`a` (where `a` is the semi-major axis and `mu` the standard gravitational parameters of the bodies involved).
+* `eta0`: a coefficient that is needed to solve, calculated in function `KeplerFlow`.
+* `zeta0`: another quantity of the equation it is needed to solve 
+* `r0`: initial distance between the two bodies.
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation
+* `dt`: time-step of the Kepler-flow.
+* `trace`: boolean value that shows information of the execution if true.
+
+# Returns
+
+* `r`: distance between the two bodies after time-step dt.
+"""
 function keplerSolve!(x0, beta, eta0, zeta0, r0, Gz, dt, trace)
     
     xi = x0 # initial estimation

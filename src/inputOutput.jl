@@ -104,19 +104,21 @@ end
 
 
 
-### saveOutput ###
-# DESCRIPTION: saves calculated positions, velocities and/or energies in a file
-# INPUT: file, r, v, e, time_step, delimeter, digits
-# @param file: the name of the output file (.txt format)
-# @param r: OxNxD matrix, where O is the number of outputs, N the number of bodies and 
-#           D the number of dimensions, it contains the positions of each body on each 
-#           output time
-# @param v: OxNxD matrix,it contains the velocities of each body on each output time
-# @param e: array of O elements, it contains the energies of the system on each output time
-# @param time_step: specifies the time between two output steps, by default 1.0
-# @param delimeter: specifies what will be written between values
-# @param digits: specifies, at most, how many decimal digits will be written
+"""
+    saveOutput(file::String, r = NaN, v = NaN, e = NaN, time_step=1.0, delimeter::String =" ", digits::Int64 =64)
 
+Saves calculated positions, velocities and/or energies in a .txt file.
+
+# Args
+
+* `file`: the name of the output file (.txt format).
+* `r`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions. It contains the positions of each body on each output time.
+* `v`: OxNxD matrix,it contains the velocities of each body on each output time.
+* `e`: array of O elements, it contains the energies of the system on each output time.
+* `time_step`: specifies the time between two output steps, by default 1.
+* `delimeter`: specifies what will be written between values.
+* `digits`: specifies, at most, how many decimal digits will be written
+"""
 function saveOutput(file::String, r = NaN, v = NaN, e = NaN, time_step=1.0, delimeter::String =" ", digits::Int64 =64)
 
     x = size(r)[1]
@@ -173,17 +175,20 @@ end
 
 
 
-### showOutput ###
-# DESCRIPTION: shows on the console the outputs that have been calculated
-# INPUT: r, v, e, names, time_step
-# @param r: OxNxD matrix, where O is the number of outputs, N the number of bodies and 
-#           D the number of dimensions, it contains the positions of each body on each 
-#           output time
-# @param v: OxNxD matrix,it contains the velocities of each body on each output time
-# @param e: array of O elements, it contains the energies of the system on each output time
-# @param names: array of N strings, it contains the names of each body
-# @param time_step: specifies the time between two output steps, by default 1.0
+"""
+    showOutput(r, v, e = NaN, names = "", time_step = 1.0)
 
+Shows on the console the outputs that have been calculated.
+
+# Args
+
+* `file`: the name of the output file (.txt format).
+* `r`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions, it contains the positions of each body on each output time.
+* `v`: OxNxD matrix,it contains the velocities of each body on each output time.
+* `e`: array of O elements, it contains the energies of the system on each output time.
+* `names`: array of N strings, it contains the names of each body.
+* `time_step`: specifies the time between two output steps, by default 1.0.
+"""
 function showOutput(r, v, e = NaN, names = "", time_step = 1.0)
     if !(size(r)[1] == size(v)[1] && (size(e) == () || x == length(e)))
         println("Error: first dimensions of r, v and e don't match.")

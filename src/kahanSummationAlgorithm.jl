@@ -1,11 +1,20 @@
-### kahanSumOneValue ###
-# DESCRIPTION: a+b is done, where the lost information in that sum is saved in c 
-# INPUT: a, b, c
-# @param a: a > b should be true for the appropiate work of the algorithm
-# @param b: the value that will be added to a
-# @param c: inititally 0, the information that it is lost in a+b should be here
-# @return sum: a+b 
-# @return c: information lost in the sum a+b
+"""
+    kahanSumOneValue(a, b, c)
+
+`a`+`b`=`sum` is done, where the lost information in that `sum` is saved in `c` (according to Kahan Summation Algorithm). Each input only represents a number.
+
+
+# Args
+
+* `a`: it is a number, where `a`>`b` should be true for the appropiate work of the algorithm.
+* `b`: the value that will be added to `a`.
+* `c`: the first time this function is called in an iteration, the value of `c` should be 0. After that, this value should contain the lost information of the last sum, for its proper function. 
+
+# Returns
+
+* `sum`: `a` + `b`.
+* `c`: information lost in the sum `a`+`b`.
+"""
 function kahanSumOneValue(a, b, c)
     sum = a
     y = b - c          # So far, so good: c is zero.
@@ -17,15 +26,18 @@ end
 
 
 
+"""
+    kahanSumOneValue(a, b, c)
 
-### kahanSum! ###
-# DESCRIPTION: a+b is done, where the lost information in that sum is saved in c 
-# INPUT: a, b, c
-# @param a: a > b should be true for the appropiate work of the algorithm
-# @param b: the value that will be added to a
-# @param c: inititally 0, the information that it is lost in a+b should be here
-# @return sum: a+b 
-# @return c: information lost in the sum a+b
+`a`+`b`=`sum` is done, where the lost information in that `sum` is saved in `c` (according to Kahan Summation Algorithm). Each input can represent an array or a matrix.
+
+
+# Args
+
+* `a`: it is a number, where `a`>`b` should be true for the appropiate work of the algorithm. `sum` values are overwritten here.
+* `b`: the value that will be added to `a`.
+* `c`: the first time this function is called in an iteration, the value of `c` should be 0. After that, this value should contain the lost information of the last sum, for its proper function. `c` values are overwritten here.
+"""
 function kahanSum!(a, b, c)
     
     if length(size(a)) == 1 # Vector

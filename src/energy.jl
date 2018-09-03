@@ -18,13 +18,13 @@ Calculates the sum of kynetic and potential energy of the N-body hamiltonian sys
 ```math
 m'_{1} = m_{sum_{N}} \\\\
 m'_{i} = m_{i} \\frac{m_{sum_{i-1}}}{m_{sum_{i}}} \\\\
-\\mathrm{where, } \\hspace{0.5cm} m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j}
+\\mathrm{,where } \\hspace{0.5cm} m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j}
 ```
 * `mu`: array of N elements, where element with index i contains the standard gravitational parameter of the i-th body
 ```math
 mu_{i} = G \\cdot m_{j} \\\\
 ```
-* `m``u_{sum}```: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
+* `mu_{sum}`: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
 ```math
 mu_{sum_{i}} = \\sum_{j = 1}^{i} G \\cdot m_{j} \\\\
 ```
