@@ -14,6 +14,7 @@ Transforms cartesian coordinates into jacobi coordinates.
 ```math
 m_{sum}[i] = \sum_{j = 1}^{i} m[j]
 ```
+BLABLA
 """
 function cartesian2jacobi!(r, r_j, m, m_sum) 
     R = m[1]*r[1,:]
