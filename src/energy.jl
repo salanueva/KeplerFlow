@@ -24,7 +24,7 @@ m'_{i} = m_{i} \\frac{m_{sum_{i-1}}}{m_{sum_{i}}} \\\\
 ```math
 mu_{i} = G \\cdot m_{j} \\\\
 ```
-* ``mu_{sum}``: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
+* ` ``mu_{sum}`` `: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
 ```math
 mu_{sum_{i}} = \\sum_{j = 1}^{i} G \\cdot m_{j} \\\\
 ```
