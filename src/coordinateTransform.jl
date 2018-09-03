@@ -3,8 +3,6 @@
 
 Transforms cartesian coordinates into jacobi coordinates.
 
-# INPUT: r, m, m_sum // OUTPUT: r_j
-
 # Args
 
 * `r`: NxD matrix where N is the number of bodies and D is the number of dimensions, each row contains the positions of the bodies in cartesian coordinates.
@@ -12,9 +10,7 @@ Transforms cartesian coordinates into jacobi coordinates.
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_sum`: array of N elements, where element with index i contains the mass of the bodies from 1 to i
 ```math
-\\begin{center}
 m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j} 
-\\end{center}
 ```
 """
 function cartesian2jacobi!(r, r_j, m, m_sum) 
@@ -27,12 +23,10 @@ function cartesian2jacobi!(r, r_j, m, m_sum)
 end
 
 
-#="""
+"""
     jacobi2cartesian!(r, r_j, m, m_sum) 
 
 Transforms jacobi coordinates into cartesian coordinates.
-
-# INPUT: r_j, m, m_sum // OUTPUT: r
 
 # Args
 
@@ -41,7 +35,7 @@ Transforms jacobi coordinates into cartesian coordinates.
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_sum`: array of N elements, where element with index i contains the mass of the bodies from 1 to i
 ```math
-m_{sum}[i] = \\sum_{j = 1}^{i} m[j]
+m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j}
 ```
 """
 function jacobi2cartesian!(r, r_j, m, m_sum) 
@@ -52,4 +46,4 @@ function jacobi2cartesian!(r, r_j, m, m_sum)
         R *= m_sum[i-1]
     end
     r[1,:] = R/m[1]
-end=#
+end

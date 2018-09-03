@@ -4,10 +4,8 @@
 Calculates the sum of kynetic and potential energy of the N-body hamiltonian system:
 
 ```math
-H_{\\mathrm{N-body}}(\\textbf{q}, \\textbf{p}) = \\frac{\\textbf{p'}^{2}_{1}}{2 m'_{1}} + \\sum_{i=2}^{N} \\frac{\\textbf{p'}^{2}_{i}}{2 m_{i}'} - \\sum_{i=1}^{N} \\sum_{j=i+1}^{N} \\frac{Gm_{i}m_{j}}{\\mid \\textbf{q}_{i} - \\textbf{q}_{j} \\mid}
+\\mathcal{H}_{\\mathrm{N-body}}(\\textbf{q}, \\textbf{p}) = \\sum_{i=1}^{N} \\frac{\\textbf{p'}^{2}_{i}}{2 m_{i}'} - \\sum_{i=1}^{N} \\sum_{j=i+1}^{N} \\frac{Gm_{i}m_{j}}{\\mid \\textbf{q}_{i} - \\textbf{q}_{j} \\mid}
 ```
-
-# INPUT: r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0
 
 # Args
 
@@ -18,22 +16,23 @@ H_{\\mathrm{N-body}}(\\textbf{q}, \\textbf{p}) = \\frac{\\textbf{p'}^{2}_{1}}{2 
 * `m`: array of N elements, where element number i contains the mass of i-th body.
 * `m_j`: array of N elements, each containing the i-th jacobi mass (``m'_{i}``)
 ```math
-m'[1] = M[N] \\\\
-m'[i] = m_{i} \\frac{M_{i-1}}{M_{i}}
+m'_{1} = m_{sum_{N}} \\\\
+m'_{i} = m_{i} \\frac{m_{sum_{i-1}}}{m_{sum_{i}}} \\\\
+\mathrm{where, } m_{sum_{i}} = \\sum_{j = 1}^{i} m_{j}
 ```
 * `mu`: array of N elements, where element with index i contains the standard gravitational parameter of the i-th body
 ```math
-mu[i] = G \\cdot m[j]
+mu_{i} = G \\cdot m_{j}
 ```
 * ``mu_{sum}``: array of N elements, where the standard gravitational parameter of the bodies from 1 to i is saved in the i-th element
 ```math
 mu_{sum_{i}} = \\sum_{j = 1}^{i} G \\cdot m[j]
 ```
-* `ignore_H0`: boolean that determines if Hamiltonian ``H_{0}`` will be ignored (when calculating the energy).
+* `ignore_H0`: boolean that determines if Hamiltonian ``\mathcal{H_{0}}`` will be ignored (when calculating the energy).
 
 # Returns 
 
-The energy of the ``H_{N-body}`` system.
+The energy of the ``\\mathcal{H}_{N-body}`` system.
 """
 function calculateEnergy(r, r_j, r_dist, p_j, m, m_j, mu, mu_sum, ignore_H0)
     energy = 0.0
