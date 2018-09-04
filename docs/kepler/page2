@@ -1,0 +1,10 @@
+# Kepler's flow
+ 
+The following functions solve Kepler's problem, and the second one includes Kahan's algorithm to reduce the loss of information in some operations.
+
+## Functions
+ 
+```@docs
+KeplerFlow.keplerFlow
+KeplerFlow.keplerFlowWithKahan
+```

@@ -1,0 +1,16 @@
+# Drift and Kick steps
+ 
+This Wisdom-Holfman map is divided in two steps: *Drift* and *Kick*. A *Drift* step is composed by evolving Keplerian orbits of the bodies, whereas the *Kick* step consists on calculating the interactions or perturbations between the bodies.
+
+The following functions defines those steps. *keplerStep!* and *keplerStepWithKahan!* are used to evolve the n-body system in the *Drift* step, whereas the other two divide the *Kick* step into two.
+
+To fully understand these steps, it is better to read the whole article of Hanno Rein and Daniel Tamayo.
+ 
+## Functions
+ 
+```@docs
+KeplerFlow.keplerStep!
+KeplerFlow.keplerStepWithKahan!
+KeplerFlow.firstInteractionStep!
+KeplerFlow.secondInteractionStep!
+```

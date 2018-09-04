@@ -1,0 +1,21 @@
+# Newton's method
+ 
+In this problem, the universal Kepler's equation is solved using Newton-Raphson's method. In this equation, `r_{0}` equals to the euclidean norm of the initial position vector of the body, ``\\eta_{0} = \\mathbf{r}_{0} \\cdot \\mathbf{v}_{0}``, and ``\\zeta_{0} = mu - \\beta \\cdot r_{0}``. 
+
+```math
+r_{0}X + \\eta_{0}G_{2} + \\zeta_{0}G_{3} - dt = 0
+```
+The universal Kepler's equation is constructed with Stiefel's `G`-functions which are built with Stumpff's `C`-functions. 
+
+```math
+C_{0} = \\cos(\\sqrt{z}) \\hspace{3cm} C_{1} = \\frac{\\sin(\\sqrt{z})}{\\sqrt{z}} \\hspace{3cm} C_{n} = \\frac{1}{n!} - z C_{n-2} \\hspace{3cm} G_{n} = X^n C_{n}
+```
+In this functions, `X` is the universal anomaly (which we want to calculate), ``\\beta = 2 \\frac{mu}{r_{0}} - \\mathbf{v}_{0}^{2}`` and ``\\zeta = \\beta \\cdot X^{2}``.
+
+ 
+## Functions
+ 
+```@docs
+KeplerFlow.stumpff!
+KeplerFlow.keplerSolve!
+```

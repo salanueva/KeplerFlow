@@ -1,0 +1,12 @@
+# Jacobi coordinates
+ 
+Those *Drift* and the first half of *Kick* steps are easier calculated using Jacobi coordinates, which use the barycenter of the masses that influence the orbit as the center of the coordinates.
+
+So, the following functions perform a numerically stable transformation between cartesian and jacobi coordinates.
+
+## Functions
+ 
+```@docs
+KeplerFlow.cartesian2jacobi!
+KeplerFlow.jacobi2cartesian!
+```

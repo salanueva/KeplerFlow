@@ -1,0 +1,11 @@
+# Energy of the system
+ 
+In this type of planetary systems, forces that are out of that system aren't taken into account. This means that the sum of kinetic and potential energies should be always the same, during the evolution of the system.
+
+The energy and its relative error are great to measure the stability of the system.
+
+## Functions
+ 
+```@docs
+KeplerFlow.calculateEnergy
+```
