@@ -13,10 +13,10 @@ Runs the Wisdom-Holfman map of the given N-body problem that defines the followi
 * `v`: NxD matrix. It contains the initial velocities of each body.
 * `m`: array of N elements. It contains the mass of each body.
 * `sld`: simulation logic dictionary, a dictionary where all posible options of the simulation can be specified.
-** `bool_energy`: if true, energy of the hamiltonian will be calculated every output step.
-** `bool_print_kep`: information about the kepler-flow will be displayed in the console.
-** `ignore_H0`: boolean that if true, the linear movement of the system will be taken into account.
-** `out_step`: the output will be calculated on every 'out_step'-th step.
+  * `bool_energy`: if true, energy of the hamiltonian will be calculated every output step.
+  * `bool_print_kep`: information about the kepler-flow will be displayed in the console.
+  * `ignore_H0`: boolean that if true, the linear movement of the system will be taken into account.
+  * `out_step`: the output will be calculated on every 'out_step'-th step.
 * `g`: gravitational constant.
 * `t_step`: time that will be simulated in each step.
 * `t_max`: specifies when the simulation will be stopped, after how much time.
