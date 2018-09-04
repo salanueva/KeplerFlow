@@ -1,19 +1,26 @@
-### simulation ###
-# DESCRIPTION: runs the Wisdom-Holfman map of the given N-body problem (the simulation itself)
-# INPUT: r, v, m, sld, g, t_step, t_max
-# @param r: NxD matrix, where N is the number of bodies and D the number of dimensions, 
-#           it contains the initial positions of each body
-# @param v: NxD matrix, where N is the number of bodies and D the number of dimensions, 
-#           it contains the initial velocities of each body
-# @param m: array of N elements, it contains the mass of each body
-# @param sld: simulation logic dictionary, a dictionary where all posible options of the
-#             simulation can be specified
-#    @key bool_energy: if true, energy of the hamiltonian will be calculated every output step
-#    @key bool_print_kep: information about the kepler-flow will be displayed in the console
-#    @key out_step: the output will be calculated on every 'out_step'-th step  
-# @param g: gravitational constant
-# @param t_step: time that will be simulated in each step
-# @param t_max: specifies when stops the simulation
+"""
+    simulation(r, v, m, sld::Dict{Any, Any}, g::Number = NaN, t_step::Number = NaN, t_max::Number = NaN)
+
+Runs the Wisdom-Holfman map of the given N-body problem that defines the following Hamiltonian system.
+
+```math
+\\mathcal{H}(\\textbf{q}, \\textbf{p}) = \\frac{\\textbf{p'}^{2}_{1}}{2 m'_{1}} + \\sum_{i=2}^{N} \\frac{\\textbf{p'}^{2}_{i}}{2 m_{i}'} - \\sum_{i=2}^{N} \\frac{Gm_{i}^{'}M_{i}}{\\mid \\textbf{q}_{i}^{'} \\mid} + \\sum_{i=2}^{N} \\frac{Gm_{i}^{'}M_{i}}{\\mid \\textbf{q}_{i}^{'} \\mid} - \\sum_{i=1}^{N} \\sum_{j=i+1}^{N} \\frac{Gm_{i}m_{j}}{\\mid \\textbf{q}_{i} - \\textbf{q}_{j} \\mid}
+```
+
+# Args
+
+* `r`: NxD matrix, where N is the number of bodies and D the number of dimensions, it contains the initial positions of each body.
+* `v`: NxD matrix. It contains the initial velocities of each body.
+* `m`: array of N elements. It contains the mass of each body.
+* `sld`: simulation logic dictionary, a dictionary where all posible options of the simulation can be specified.
+** `bool_energy`: if true, energy of the hamiltonian will be calculated every output step.
+** `bool_print_kep`: information about the kepler-flow will be displayed in the console.
+** `ignore_H0`: boolean that if true, the linear movement of the system will be taken into account.
+** `out_step`: the output will be calculated on every 'out_step'-th step.
+* `g`: gravitational constant.
+* `t_step`: time that will be simulated in each step.
+* `t_max`: specifies when the simulation will be stopped, after how much time.
+"""
 function simulation(r, v, m, sld::Dict{Any, Any}, g::Number = NaN, t_step::Number = NaN, t_max::Number = NaN)
     
     ### Analyze given input and calculate some variables

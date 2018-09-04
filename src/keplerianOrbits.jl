@@ -41,7 +41,7 @@ end
 """
     keplerSolve!(x0, beta, eta0, zeta0, r0, Gz, dt, trace)
 
-Solves the universal equation of kepler. In this equation, G_{2} and G_{3} are the third and fourth
+Solves the universal equation of kepler. In this equation, G_{2} and G_{3} are the third and fourth g-functions, respectively.
 
 ```math
 r_{0}X + \\eta_{0}G_{2} + \\zeta_{0}G_{3} - dt = 0
@@ -54,7 +54,7 @@ r_{0}X + \\eta_{0}G_{2} + \\zeta_{0}G_{3} - dt = 0
 * `eta0`: a coefficient that is needed to solve, calculated in function `KeplerFlow`.
 * `zeta0`: another quantity of the equation it is needed to solve 
 * `r0`: initial distance between the two bodies.
-* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation. That is why it's passed as an argument.
 * `dt`: time-step of the Kepler-flow.
 * `trace`: boolean value that shows information of the execution if true.
 
@@ -109,20 +109,26 @@ end
 
 
 
-### KeplerFlow ###
-# DESCRIPTION: defines the position and speeds of a particle -after a time-step- orbiting 
-#              another body given its initial position and speeds
-# INPUT: r0_bek, v0_bek, dt, mu, trace // AUXILIAR: Gz
-# @param r0_bek: position vector of the secondary body orbiting the primary body
-# @param v0_bek: speed vector of the secondary body orbiting the primary body
-# @param dt: time-step, the function returns the new position and speed vectors after dt time has passed
-# @param mu: standard gravitational parameter of the two bodies
-# @param Gz: array of the 4 g-functions. Instead of defining it on each execution of 
-#            the function, the same array is used in the whole simulation
-# @param trace: boolean value that shows information of the execution if true
-# @return r_bek: the position vector of the body after dt time from the initial values
-# @return v_bek: the velocity vector of the body after dt time from the initial values
+"""
+    keplerFlow(r0_bek, v0_bek, dt, mu, Gz, trace = false)
 
+Defines the position and speeds of a particle -after a time-step- orbiting another body given its initial position and speeds.
+
+# Args
+
+* `r0_bek`: position vector of the secondary body orbiting the primary body.
+* `v0_bek`: velocity vector of the secondary body orbiting the primary body.
+* `dt`: time-step, the function returns the new position and speed vectors after dt time has passed.
+* `mu`: standard gravitational parameter of the two bodies.
+* `r0`: initial distance between the two bodies.
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation. That is why it's passed as an argument.
+* `trace`: boolean value that shows information of the execution if true.
+
+# Returns
+
+* `r_bek`: the position vector of the body after dt time from the initial values.
+* `v_bek`: the position vector of the body after dt time from the initial values.
+"""
 function keplerFlow(r0_bek, v0_bek, dt, mu, Gz, trace = false)
     
     r0 = norm(r0_bek)
@@ -177,23 +183,28 @@ end
 
 
 
-### KeplerFlowWithKahan ###
-# DESCRIPTION: defines the position and speeds of a particle -after a time-step- orbiting 
-#              another body given its initial position and speeds
-# INPUT: r0_bek, v0_bek, dt, mu, trace, r_k, v_k // AUXILIAR: Gz // OUTPUT: r_k, v_k
-# @param r0_bek: position vector of the secondary body orbiting the primary body
-# @param v0_bek: speed vector of the secondary body orbiting the primary body
-# @param dt: time-step, the function returns the new position and speed vectors after dt time has passed
-# @param mu: standard gravitational parameter of the two bodies
-# @param Gz: array of the 4 g-functions. Instead of defining it on each execution of 
-#            the function, the same array is used in the whole simulation
-# @param r_k: lost information in the sum of the f and g coefficients is saved here and 
-#             used in the next iteration (for positions)
-# @param v_k: lost information in the sum of the f and g coefficients is saved here and 
-#             used in the next iteration (for velocities)
-# @param trace: boolean value that shows information of the execution if true
-# @return r_bek: the position vector of the body after dt time from the initial values
-# @return v_bek: the velocity vector of the body after dt time from the initial values
+"""
+    keplerFlowWithKahan(r0_bek, v0_bek, dt, mu, Gz, trace, r_k, v_k)
+
+Defines the position and speeds of a particle -after a time-step- orbiting another body given its initial position and speeds. When the new vectors are calculated, Kahan's algorithm is applied. 
+
+# Args
+
+* `r0_bek`: position vector of the secondary body orbiting the primary body.
+* `v0_bek`: speed vector of the secondary body orbiting the primary body.
+* `dt`: time-step, the function returns the new position and speed vectors after dt time has passed.
+* `mu`: standard gravitational parameter of the two bodies.
+* `r0`: initial distance between the two bodies.
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation. That is why it's passed as an argument.
+* `trace`: boolean value that shows information of the execution if true.
+* `r_k`: lost information in the sum of the ``f`` and ``g`` coefficients is saved here and used in the next iteration (for positions).
+* `v_k`: lost information in the sum of the ``\\dot{f}`` and ``\\dot{g}`` coefficients is saved here and used in the next iteration (for velocities).
+
+# Returns
+
+* `r_bek`: the position vector of the body after dt time-step from the initial values.
+* `v_bek`: the velocity vector of the body after dt time-step from the initial values.
+"""
 function keplerFlowWithKahan(r0_bek, v0_bek, dt, mu, Gz, trace, r_k, v_k)
         
     r0 = norm(r0_bek)
@@ -248,21 +259,25 @@ end
 
 
 
-### keplerStep! ###
-# DESCRIPTION: drifts all particles/bodies under H_Kepler hamiltonian
-# INPUT: r, v, dt, mu, trace // AUXILIAR: Gz // OUTPUT: r, v
-# @param r: initially must contain the initial positions of the bodies, but the output
-#           positions will be saved here as well (NxD, where N is the number of bodies 
-#           and D is the number of dimensions)
-# @param v: initially must contain the initial speeds of the bodies, but the output
-#           speeds will be saved here as well (NxD, where N is the number of bodies 
-#           and D is the number of dimensions)
-# @param dt: time-step between the initial and final positions and speeds
-# @param mu: standard gravitational parameters of the two bodies
-# @param Gz: array of the 4 g-functions. Instead of defining it on each execution of 
-#            the function, the same array is used in the whole simulation
-# @param trace: boolean value that shows information of the execution if true
+"""
+    keplerStep!(r, v, dt, mu, Gz, trace)
 
+Drifts all particles/bodies under ``\\mathcal{H}_{\\mathrm{Kepler}}`` hamiltonian.
+
+```math
+\\mathcal{H}_{\\mathrm{Kepler}}(\\textbf{q}, \\textbf{p}) = \\sum_{i=2}^{N} \\frac{\\textbf{p'}^{2}_{i}}{2 m_{i}'} - \\sum_{i=2}^{N} \\frac{Gm_{i}^{'}M_{i}}{\\mid \\textbf{q}_{i}^{'} \\mid} 
+```
+
+# Args
+
+* `r`: NxD matrix, where N is the number of bodies and D the dimensions. Initially must contain the initial positions of the bodies, but the output positions will be saved here as well (NxD, where N is the number of bodies  and D is the number of dimensions).
+* `v`: NxD matrix. Initially must contain the initial speeds of the bodies, but the output speeds will be saved here as well (NxD, where N is the number of bodies and D is the number of dimensions).
+* `dt`: time-step between the initial and final positions and speeds.
+* `mu`: N array. Standard gravitational parameter of the N bodies.
+* `r0`: initial distance between the two bodies.
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation. That is why it's passed as an argument.
+* `trace`: boolean value that shows information of the execution if true.
+"""
 function keplerStep!(r, v, dt, mu, Gz, trace)
     # drift all particles under H_Kepler
     for i in 2:size(r)[1]
@@ -273,28 +288,30 @@ end
 
 
 
-### keplerStepWithKahan! ###
-# DESCRIPTION: drifts all particles/bodies under H_Kepler hamiltonian
-# INPUT: r, v, dt, mu, trace, r_k, v_k // AUXILIAR: Gz // OUTPUT: r, v, r_k, v_k
-# @param r: initially must contain the initial positions of the bodies, but the output
-#           positions will be saved here as well (NxD, where N is the number of bodies 
-#           and D is the number of dimensions)
-# @param v: initially must contain the initial speeds of the bodies, but the output
-#           speeds will be saved here as well (NxD, where N is the number of bodies 
-#           and D is the number of dimensions)
-# @param dt: time-step between the initial and final positions and speeds
-# @param mu: standard gravitational parameters of the two bodies
-# @param Gz: array of the 4 g-functions. Instead of defining it on each execution of 
-#            the function, the same array is used in the whole simulation
-# @param trace: boolean value that shows information of the execution if true
-# @param r_k: auxiliary variable to save extra information of Kahan's algorithm (positions)
-# @param v_k: auxiliary variable to save extra information of Kahan's algorithm (velocities)
+"""
+    keplerStepWithKahan!(r, v, dt, mu, Gz, trace, r_k, v_k)
 
+Drifts all particles/bodies under ``\\mathcal{H}_{\\mathrm{Kepler}}`` hamiltonian.
+
+```math
+\\mathcal{H}_{\\mathrm{Kepler}}(\\textbf{q}, \\textbf{p}) = \\sum_{i=2}^{N} \\frac{\\textbf{p'}^{2}_{i}}{2 m_{i}'} - \\sum_{i=2}^{N} \\frac{Gm_{i}^{'}M_{i}}{\\mid \\textbf{q}_{i}^{'} \\mid} 
+```
+
+# Args
+
+* `r`: NxD matrix, where N is the number of bodies and D the dimensions. Initially must contain the initial positions of the bodies, but the output positions will be saved here as well.
+* `v`: NxD matrix. Initially must contain the initial speeds of the bodies, but the output speeds will be saved here as well.
+* `dt`: time-step between the initial and final positions and speeds.
+* `mu`: array of N elements, containing standard gravitational parameters of the N bodies.
+* `r0`: initial distance between the two bodies.
+* `Gz`: array of the first four g-functions. Instead of defining it on each execution of the function, the same array is used in the whole simulation. That is why it's passed as an argument.
+* `trace`: boolean value that shows information of the execution if true.
+* `r_k`: auxiliary variable to save extra information of Kahan's algorithm (positions). Same dimension as `r`.
+* `v_k`: auxiliary variable to save extra information of Kahan's algorithm (velocities). Same dimension as `v`.
+"""
 function keplerStepWithKahan!(r, v, dt, mu, Gz, trace, r_k, v_k)
     ### drift all particles under H_Kepler  
     for i in 2:size(r)[1]
         r[i,:], v[i,:] =keplerFlowWithKahan(r[i,:], v[i,:], dt, mu[i], Gz, trace, r_k[i,:], v_k[i,:])
     end
 end
-
-
