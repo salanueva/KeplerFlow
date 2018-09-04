@@ -12,7 +12,7 @@ Runs the Wisdom-Holfman map of the given N-body problem that defines the followi
 * `r`: NxD matrix, where N is the number of bodies and D the number of dimensions, it contains the initial positions of each body.
 * `v`: NxD matrix. It contains the initial velocities of each body.
 * `m`: array of N elements. It contains the mass of each body.
-* `sld`: simulation logic dictionary, a dictionary where all posible options of the simulation can be specified.
+* `sld`: simulation logic dictionary, a dictionary where all posible options of the simulation can be specified. The following keys can be defined:
   * `bool_energy`: if true, energy of the hamiltonian will be calculated every output step.
   * `bool_print_kep`: information about the kepler-flow will be displayed in the console.
   * `ignore_H0`: boolean that if true, the linear movement of the system will be taken into account.
