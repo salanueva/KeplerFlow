@@ -9,6 +9,14 @@ DISCLAIMER: This package was made in my final degree project, and its final goal
 
 The code is mainly based on the following paper: [WHFast: A fast and unbiased implementation of a symplectic Wisdom-Holman integrator for long term gravitational simulations](https://arxiv.org/abs/1506.01084) by Hanno Rein and Daniel Tamayo. 
 
+## Adding Package
+
+In order to add this Julia package (Version 1.0 or newer), the following command has to be executed:
+
+```julia
+add https://github.com/salanueva/KeplerFlow.jl
+```
+
 
 The package offers two main algorithms which solve two different problems: the Kepler problem, and the N-body problem. Some minor changes have been made in order to improve execution-times and the accuracy of the solvers.
 
@@ -40,7 +48,7 @@ KeplerFlow.keplerFlowWithKahan
 
 ## N-body Problem
 
-This problem's main goal is to evolve a planetary system under a time-step `dt`. This is a problem that has to be solved using a numerical approach. So, a Wisdom-Holfman map defined in the above mentioned article has been coded.
+This problem's main goal is to evolve a planetary system under a time-step `dt`. This is a problem that has to be solved using a numerical approach. So, a Wisdom-Holfman map, defined in the above mentioned article, has been coded.
 
 ```@docs
 KeplerFlow.simulation
