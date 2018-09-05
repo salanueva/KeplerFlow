@@ -113,8 +113,8 @@ Saves calculated positions, velocities and/or energies in a .txt file.
 
 * `file`: the name of the output file (.txt format).
 * `r`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions. It contains the positions of each body on each output time.
-* `v`: OxNxD matrix,it contains the velocities of each body on each output time.
-* `e`: array of O elements, it contains the energies of the system on each output time.
+* `v`: OxNxD matrix (optional), it contains the velocities of each body on each output time.
+* `e`: array of O elements (optional), it contains the energies of the system on each output time.
 * `time_step`: specifies the time between two output steps, by default 1.
 * `delimeter`: specifies what will be written between values.
 * `digits`: specifies, at most, how many decimal digits will be written
