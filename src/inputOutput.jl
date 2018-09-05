@@ -150,14 +150,14 @@ function saveOutput(file::String, r = NaN, v = NaN, e = NaN, time_step=1.0, deli
     for m in 1:x
         if size(r) != ()
             for n in 1:y
-                write(f, string("$(round(r[m,n,1], digits))", delimeter,"$(round(r[m,n,2], digits))", delimeter,"$(round(r[m,n,3], digits))",delimeter))
+                write(f, string("$(round(r[m,n,1];digits=digits))", delimeter,"$(round(r[m,n,2];digits=digits))", delimeter,"$(round(r[m,n,3];digits=digits))",delimeter))
             end
             write(f, "\n")
         end
         
         if size(v) != ()
             for n in 1:y
-                write(f, string("$(round(v[m,n,1], digits))", delimeter,"$(round(v[m,n,2], digits))", delimeter,"$(round(v[m,n,3], digits))",delimeter))  
+                write(f, string("$(round(v[m,n,1];digits=digits))", delimeter,"$(round(v[m,n,2];digits=digits))", delimeter,"$(round(v[m,n,3];digits=digits))",delimeter))  
             end
             write(f, "\n")
         end
