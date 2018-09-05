@@ -20,6 +20,12 @@ Runs the Wisdom-Holfman map of the given N-body problem that defines the followi
 * `g`: gravitational constant.
 * `t_step`: time that will be simulated in each step.
 * `t_max`: specifies when the simulation will be stopped, after how much time.
+
+# Returns
+
+* `r_out`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions, it contains the positions calculated on specified time-steps of each body.
+* `v_out`: OxNxD matrix, it contains the velocities calculated on specified time-steps of each body.
+* `e_out`: array of O elements, it contains the energies of each output step of the whole N-body system.
 """
 function simulation(r, v, m, sld::Dict{Any, Any}, g::Number = NaN, t_step::Number = NaN, t_max::Number = NaN)
     
