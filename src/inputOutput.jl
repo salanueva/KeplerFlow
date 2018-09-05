@@ -185,12 +185,12 @@ Shows on the console the outputs that have been calculated.
 * `file`: the name of the output file (.txt format).
 * `r`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions, it contains the positions of each body on each output time.
 * `v`: OxNxD matrix,it contains the velocities of each body on each output time.
-* `e`: array of O elements, it contains the energies of the system on each output time.
-* `names`: array of N strings, it contains the names of each body.
+* `e`: array of O elements (optional), it contains the energies of the system on each output time.
+* `names`: array of N strings (optional), it contains the names of each body.
 * `time_step`: specifies the time between two output steps, by default 1.0.
 """
 function showOutput(r, v, e = NaN, names = "", time_step = 1.0)
-    if !(size(r)[1] == size(v)[1] && (size(e) == () || x == length(e)))
+    if !(size(r)[1] == size(v)[1] && (size(e) == () || size(r)[1] == length(e)))
         println("Error: first dimensions of r, v and e don't match.")
         return
     elseif size(r)[2] != size(v)[2] || size(r)[3] != size(v)[3] || size(r)[3] != 3
