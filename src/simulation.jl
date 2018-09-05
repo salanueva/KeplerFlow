@@ -39,39 +39,39 @@ function simulation(r, v, m, sld::Dict{Any, Any}, g::Number = NaN, t_step::Numbe
     r_c = copy(r) # cartesian positions
     v_c = copy(v) # cartesian velocities
     
-    r_j = zeros(r) # jacobi positions
-    v_j = zeros(r) # jacobi velocities
+    r_j = zero(r) # jacobi positions
+    v_j = zero(r) # jacobi velocities
     
-    m_j = zeros(m) # jacobi masses
-    mu = zeros(m) # standard gravitational parameters
-    mu_sum = zeros(m) # standard gravitational parameters of the sum of inner bodies
-    m_sum = zeros(m) # sum of masses of inner bodies
+    m_j = zero(m) # jacobi masses
+    mu = zero(m) # standard gravitational parameters
+    mu_sum = zero(m) # standard gravitational parameters of the sum of inner bodies
+    m_sum = zero(m) # sum of masses of inner bodies
     
     Gz = zeros(typeof(r[1,1]),4) # g-functions will be saved here
     
     # if used values haven't got enough precision, define auxiliary varaibles for Kahan
     if eps(typeof(g)) > 1e-30
-        r_kahan = zeros(r)
-        v_kahan = zeros(r)
+        r_kahan = zero(r)
+        v_kahan = zero(r)
     end
     
     # if there are only 2 bodies, don't define the following
     if size(r)[1] > 2
-        a_1 = zeros(r)
-        a_2 = zeros(r)
+        a_1 = zero(r)
+        a_2 = zero(r)
 
-        dp = zeros(r[1,:])
-        dp_sum = zeros(r)
+        dp = zero(r[1,:])
+        dp_sum = zero(r)
         
         if eps(typeof(g)) > 1e-30
-            kick_kahan = zeros(r)
+            kick_kahan = zero(r)
         end
     end
     
     # auxiliary variables to use when calculating energy
     if sld["bool_energy"]
-        p_j = zeros(r)
-        r_dist = zeros(m)
+        p_j = zero(r)
+        r_dist = zero(m)
     end
     
     # iteration count and step variables
