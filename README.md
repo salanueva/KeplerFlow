@@ -51,6 +51,10 @@ julia> r, v = keplerFlow(r0, v0, dt, mu, Gz, false)
 
 `Gz` is an auxiliary array in which Stiefel's G-functions are saved (used to calculate `f` and `g` coefficients), and the last argument of the function specifies if we want to debug what values are calculated during its execution.
 
+A variation of function *keplerFlow*, named *keplerFlowWithKahan*, is used in order to reduce the loss of information. It's use is preferred when the system has to be evolved under series of time-steps, or when the floating-point arithmetic has little precision.
+
+Another variation of function *keplerFlow* can be found in the package, which is inplemented in C (*cKeplerFlow!*). It only admits *Float64* data types, but it is faster than the Julia inplementation.
+
 
 ## N-body Problem
 
@@ -136,3 +140,27 @@ julia> delimeter = " "
 julia> digits = 16
 julia> saveOutput(file_name, pos_out, v_out, energy, dt, delimeter, digits)
 ``` 
+
+
+## List of available functions
+
+This functions are used in order to solve both Kepler's problem and the N-body problem. The ones above described are designed to be used by any user. The others which appear on this list are facilitated just if someone finds them useful.
+
+ * calculateEnergy
+ * calculateMassMu!
+ * cartesian2jacobi!
+ * cKeplerFlow!
+ * firstInteractionStep!
+ * jacobi2cartesian!
+ * kahanSumOneValue
+ * kahanSum!
+ * keplerFlow
+ * keplerFlowWithKahan
+ * keplerSolve!
+ * keplerStep!
+ * keplerStepWithKahan!
+ * saveOutput
+ * secondInteractionStep!
+ * showOutput
+ * simulation
+ * stumpff!
