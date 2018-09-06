@@ -182,7 +182,6 @@ Shows on the console the outputs that have been calculated.
 
 # Args
 
-* `file`: the name of the output file (.txt format).
 * `r`: OxNxD matrix, where O is the number of outputs, N the number of bodies and D the number of dimensions, it contains the positions of each body on each output time.
 * `v`: OxNxD matrix,it contains the velocities of each body on each output time.
 * `e`: array of O elements (optional), it contains the energies of the system on each output time.
@@ -203,14 +202,15 @@ function showOutput(r, v, e = NaN, names = "", time_step = 1.0)
         names = string.(collect(1:n))
     end
     for i in 1:size(r)[1]
-        total_dt += time_step
-        println(" --- Iteration $i - Time $total_dt ---")
+        println("--- Iteration $(i-1) - Time $total_dt ---")
         if size(e) != ()
-            println(" Total energy: $(e[i])")
+            println("Total energy: $(e[i])")
         end
-        println(" NAME: X, Y, Z; Vx, Vy, Vz")
+        println("NAME: X, Y, Z; Vx, Vy, Vz")
         for j in 1:size(r)[2]
-            println("""$(names[j]): $(r[i,j,1]), $(r[i,j,2]), $(r[i,j,3]); $(v[i,j,1]), $(v[i,j,2]), $(v[i,j,3])\n""")
+            println("""$(names[j]): $(r[i,j,1]), $(r[i,j,2]), $(r[i,j,3]); $(v[i,j,1]), $(v[i,j,2]), $(v[i,j,3])""")
         end
+        println("")
+        total_dt += time_step
     end
 end
